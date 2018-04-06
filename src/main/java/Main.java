@@ -6,6 +6,6 @@ public class Main {
         DataGenerator generator=new DataGenerator();
         generator.generate();
 
-        System.out.println("a");
+        System.out.println("ready");
     }
 }

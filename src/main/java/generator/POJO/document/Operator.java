@@ -1,9 +1,10 @@
-package generator.POJO;
+package generator.POJO.document;
 
-import generator.customAnnotation.GenOperator;
+import generator.POJO.DBObject;
+import generator.customAnnotation.annotations.GenOperator;
 import io.dummymaker.annotation.special.GenEnumerate;
 
-public class Operator implements DBObject{
+public class Operator implements DBObject {
 
     @GenEnumerate(from = 1)
     private Integer id;

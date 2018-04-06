@@ -1,5 +1,6 @@
-package generator.POJO;
+package generator.POJO.document;
 
+import generator.POJO.DBObject;
 import io.dummymaker.annotation.special.GenEnumerate;
 import io.dummymaker.annotation.string.GenCity;
 

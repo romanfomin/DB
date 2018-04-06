@@ -1,4 +1,4 @@
-package generator.customAnnotation;
+package generator.customAnnotation.impl;
 
 import io.dummymaker.generator.IGenerator;
 

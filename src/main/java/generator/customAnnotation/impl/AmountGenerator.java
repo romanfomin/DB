@@ -1,17 +1,15 @@
-package generator.customAnnotation;
+package generator.customAnnotation.impl;
 
 import io.dummymaker.generator.IGenerator;
 
 import java.util.Random;
 
-public class PriceGenerator implements IGenerator<Integer> {
-
+public class AmountGenerator implements IGenerator<Integer> {
     @Override
     public Integer generate() {
         Random r=new Random();
-        int min=10;
-        int max=100;
+        int min=1;
+        int max=500;
         return r.nextInt((max-min)+1)+min;
     }
-
 }
