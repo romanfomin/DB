@@ -22,4 +22,8 @@ public class OptionActivation implements DBObject {
     public Integer getId() {
         return userId;
     }
+
+    public Integer getOptionId() {
+        return optionId;
+    }
 }

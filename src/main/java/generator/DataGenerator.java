@@ -2,10 +2,10 @@ package generator;
 
 import generator.POJO.*;
 import generator.POJO.column.OptionActivation;
-import generator.POJO.column.TarifActivation;
+import generator.POJO.column.TariffActivation;
 import generator.POJO.column.UsagePerMonth;
 import generator.POJO.document.*;
-import generator.POJO.graph.FromCityRel;
+import generator.POJO.graph.*;
 import generator.customAnnotation.impl.OperatorGenerator;
 import io.dummymaker.export.IExporter;
 import io.dummymaker.export.impl.CsvExporter;
@@ -28,12 +28,19 @@ public class DataGenerator {
     private final int usagePerMonthNumber = usersNumber;
 
     private final int fromCityRelNumber = usersNumber;
+    private final int hasTariffRelNumber = 100;
+    private final int hasOptionRelNumber = 300;
 
-    private List<Integer> usersId = new ArrayList<>(usersNumber);
-    private List<Integer> operatorsId = new ArrayList<>(operatorsNumber);
-    private List<Integer> optionsId = new ArrayList<>(optionsNumber);
-    private List<Integer> citiesId = new ArrayList<>(citiesNumber);
-    private List<Integer> tariffsId = new ArrayList<>(tariffsNumber);
+    private List<Integer> usersId;
+    private List<Integer> operatorsId;
+    private List<Integer> optionsId;
+    private List<Integer> citiesId;
+    private List<Integer> tariffsId;
+
+    private List<OptionActivation> optionActivations;
+    private List<TariffActivation> tariffActivations;
+    private List<UsesOptionRel> usesOptionRels = new ArrayList<>();
+    private List<UsesTariffRel> usesTariffRels = new ArrayList<>();
 
     private IProduceFactory factory = new GenProduceFactory();
     private IExporter exporter = new CsvExporter();
@@ -47,14 +54,31 @@ public class DataGenerator {
         citiesId = generateObject(City.class, citiesNumber);
         tariffsId = generateObject(Tariff.class, tariffsNumber);
 
+
         /* generate data for column-oriented */
-        generateObject(TarifActivation.class, tariffsActivationNumber);
-        generateObject(OptionActivation.class, optionsActivationNumber);
-        generateObject(UsagePerMonth.class, usagePerMonthNumber);
+        tariffActivations = generateColumnObject(TariffActivation.class, tariffsActivationNumber);
+        optionActivations = generateColumnObject(OptionActivation.class, optionsActivationNumber);
+        generateColumnObject(UsagePerMonth.class, usagePerMonthNumber);
+
 
         /* generate data for graph */
         generateObject(FromCityRel.class, fromCityRelNumber);
+        generateObject(HasOptionRel.class, hasOptionRelNumber);
+        generateObject(HasTariffRel.class, hasTariffRelNumber);
 
+        for (TariffActivation ta : tariffActivations) {
+            usesTariffRels.add(new UsesTariffRel(ta.getId(), ta.getTariffId()));
+        }
+        exporter.export(usesTariffRels);
+        tariffActivations.clear();
+        usesTariffRels.clear();
+
+        for (OptionActivation oa : optionActivations) {
+            usesOptionRels.add(new UsesOptionRel(oa.getId(), oa.getOptionId()));
+        }
+        exporter.export(usesOptionRels);
+        optionActivations.clear();
+        usesOptionRels.clear();
     }
 
     private <T extends DBObject> List<Integer> generateObject(Class<T> tClass, int amount) {
@@ -65,5 +89,10 @@ public class DataGenerator {
             ids.add(tObj.getId());
         }
         return ids;
+    }
+
+    private <T extends DBObject> List<T> generateColumnObject(Class<T> tClass, int amount) {
+        List<T> tList = factory.produce(tClass, amount);
+        return tList;
     }
 }

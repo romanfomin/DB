@@ -7,7 +7,7 @@ import io.dummymaker.annotation.time.GenDate;
 
 import java.util.Date;
 
-public class TarifActivation implements DBObject {
+public class TariffActivation implements DBObject {
 
     @GenEnumerate(from = 1)
     private Integer userId;
@@ -21,5 +21,9 @@ public class TarifActivation implements DBObject {
     @Override
     public Integer getId() {
         return userId;
+    }
+
+    public Integer getTariffId() {
+        return tariffId;
     }
 }
