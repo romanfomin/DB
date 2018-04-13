@@ -17,14 +17,14 @@ import java.util.List;
 
 public class DataGenerator {
 
-    private final int usersNumber = 20;
+    private final int usersNumber = 2000000;
     private final int operatorsNumber = OperatorGenerator.getOperatorsNumber();
     private final int optionsNumber = 40;
     private final int citiesNumber = 50;
     private final int tariffsNumber = 40;
 
     private final int tariffsActivationNumber = usersNumber;
-    private final int optionsActivationNumber = optionsNumber;
+    private final int optionsActivationNumber = usersNumber;
     private final int usagePerMonthNumber = usersNumber;
 
     private final int fromCityRelNumber = usersNumber;
@@ -93,6 +93,7 @@ public class DataGenerator {
 
     private <T extends DBObject> List<T> generateColumnObject(Class<T> tClass, int amount) {
         List<T> tList = factory.produce(tClass, amount);
+        exporter.export(tList);
         return tList;
     }
 }
