@@ -41,6 +41,7 @@ public class DataGenerator {
     private List<TariffActivation> tariffActivations;
     private List<UsesOptionRel> usesOptionRels = new ArrayList<>();
     private List<UsesTariffRel> usesTariffRels = new ArrayList<>();
+    private List<UsesOperatorRel> usesOperatorRels = new ArrayList<>();
 
     private IProduceFactory factory = new GenProduceFactory();
     private IExporter exporter = new CsvExporter();
@@ -65,6 +66,12 @@ public class DataGenerator {
         generateObject(FromCityRel.class, fromCityRelNumber);
         generateObject(HasOptionRel.class, hasOptionRelNumber);
         generateObject(HasTariffRel.class, hasTariffRelNumber);
+
+        for (TariffActivation ta : tariffActivations) {
+            usesOperatorRels.add(new UsesOperatorRel(ta.getId(), ta.getOperatorId()));
+        }
+        exporter.export(usesOperatorRels);
+        usesOperatorRels.clear();
 
         for (TariffActivation ta : tariffActivations) {
             usesTariffRels.add(new UsesTariffRel(ta.getId(), ta.getTariffId()));

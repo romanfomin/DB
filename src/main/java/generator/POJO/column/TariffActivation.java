@@ -1,6 +1,7 @@
 package generator.POJO.column;
 
 import generator.POJO.DBObject;
+import generator.customAnnotation.annotations.GenOperatorId;
 import generator.customAnnotation.annotations.GenTariffId;
 import io.dummymaker.annotation.special.GenEnumerate;
 import io.dummymaker.annotation.time.GenDate;
@@ -15,6 +16,9 @@ public class TariffActivation implements DBObject {
     @GenTariffId
     private Integer tariffId;
 
+    @GenOperatorId
+    private Integer operatorId;
+
     @GenDate
     private Date date;
 
@@ -25,5 +29,9 @@ public class TariffActivation implements DBObject {
 
     public Integer getTariffId() {
         return tariffId;
+    }
+
+    public Integer getOperatorId() {
+        return operatorId;
     }
 }

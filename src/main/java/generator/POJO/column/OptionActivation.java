@@ -1,6 +1,7 @@
 package generator.POJO.column;
 
 import generator.POJO.DBObject;
+import generator.customAnnotation.annotations.GenOperatorId;
 import generator.customAnnotation.annotations.GenOptionId;
 import generator.customAnnotation.annotations.GenUserId;
 import io.dummymaker.annotation.time.GenDate;
@@ -15,6 +16,9 @@ public class OptionActivation implements DBObject {
     @GenOptionId
     private Integer optionId;
 
+    @GenOperatorId
+    private Integer operatorId;
+
     @GenDate
     private Date date;
 
@@ -25,5 +29,9 @@ public class OptionActivation implements DBObject {
 
     public Integer getOptionId() {
         return optionId;
+    }
+
+    public Integer getOperatorId() {
+        return operatorId;
     }
 }
