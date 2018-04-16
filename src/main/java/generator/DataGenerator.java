@@ -17,7 +17,7 @@ import java.util.List;
 
 public class DataGenerator {
 
-    private final int usersNumber = 2000000;
+    private final int usersNumber = 200000;
     private final int operatorsNumber = OperatorGenerator.getOperatorsNumber();
     private final int optionsNumber = 40;
     private final int citiesNumber = 50;

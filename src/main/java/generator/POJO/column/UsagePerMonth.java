@@ -4,6 +4,7 @@ import generator.POJO.DBObject;
 import generator.customAnnotation.annotations.GenAmount;
 import io.dummymaker.annotation.special.GenEnumerate;
 import io.dummymaker.annotation.time.GenDate;
+import io.dummymaker.annotation.time.GenTimestamp;
 
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class UsagePerMonth implements DBObject {
     @GenAmount
     private Integer smsAmount;
 
-    @GenDate
+    @GenTimestamp
     private Date date;
 
     @Override

@@ -5,6 +5,7 @@ import generator.customAnnotation.annotations.GenOperatorId;
 import generator.customAnnotation.annotations.GenTariffId;
 import io.dummymaker.annotation.special.GenEnumerate;
 import io.dummymaker.annotation.time.GenDate;
+import io.dummymaker.annotation.time.GenTimestamp;
 
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class TariffActivation implements DBObject {
     @GenOperatorId
     private Integer operatorId;
 
-    @GenDate
+    @GenTimestamp
     private Date date;
 
     @Override
